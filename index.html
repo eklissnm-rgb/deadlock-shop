@@ -2,45 +2,102 @@
 <html lang="pt-BR">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Mira Morta — Loja</title>
 
+
 <style>
+
+/* =========================================================
+   BASE
+========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+
     margin: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
-    background: #111;
-    font-family: Arial, sans-serif;
+
+    background: #101112;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+
 }
 
-/* Área visível */
+
+/* =========================================================
+   ÁREA DO MAPA
+========================================================= */
 
 #viewport {
+
     width: 100vw;
     height: 100vh;
+
     overflow: hidden;
+
     position: relative;
+
     cursor: grab;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(120,120,120,0.08),
+            transparent 60%
+        ),
+
+        linear-gradient(
+            rgba(255,255,255,0.015) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.015) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        auto,
+        50px 50px,
+        50px 50px;
+
 }
 
-/* Quando estiver arrastando */
 
 #viewport.dragging {
+
     cursor: grabbing;
+
 }
 
-/* Mapa */
+
+/* =========================================================
+   MAPA
+========================================================= */
 
 #shop {
+
     position: absolute;
 
     width: 1800px;
@@ -48,132 +105,261 @@ html, body {
 
     transform-origin: 0 0;
 
-    background:
-        radial-gradient(circle at center,
-        rgba(80,80,80,0.12),
-        transparent 60%);
-
 }
 
-/* Tiers */
+
+/* =========================================================
+   TIERS
+========================================================= */
 
 .tier {
+
     position: absolute;
 
     left: 100px;
+
     width: 1600px;
 
-    border-top: 1px solid rgba(255,255,255,0.15);
+    border-top:
+
+        1px solid
+        rgba(255,255,255,0.10);
+
 }
+
+
+.tier::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: -1px;
+
+    height: 1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,0.18),
+            transparent
+        );
+
+}
+
 
 .tier-name {
 
     position: absolute;
 
     left: 0;
-    top: -30px;
 
-    font-size: 14px;
-    letter-spacing: 3px;
+    top: -35px;
 
-    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    color:
+
+        rgba(255,255,255,0.35);
 
 }
 
-/* Tier positions */
+
+/* posições */
 
 .tier1 {
+
     top: 850px;
+
 }
+
 
 .tier2 {
+
     top: 550px;
+
 }
+
 
 .tier3 {
+
     top: 250px;
-}
-
-/* Connections */
-
-.connection {
-
-    position: absolute;
-
-    height: 3px;
-
-    background: rgba(255,255,255,0.25);
-
-    transform-origin: left center;
 
 }
 
-/* Items */
+
+/* =========================================================
+   ITENS
+========================================================= */
 
 .item {
 
     position: absolute;
 
-    width: 90px;
-    height: 90px;
+    width: 76px;
+    height: 76px;
 
     border-radius: 50%;
-
-    background: #202020;
-
-    border: 3px solid #888;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    color: white;
+    overflow: hidden;
 
-    font-size: 12px;
+    background:
 
-    text-align: center;
+        radial-gradient(
+            circle,
+            #343638,
+            #171819
+        );
+
+    border:
+
+        2px solid
+        rgba(255,255,255,0.30);
+
+    box-shadow:
+
+        0 4px 15px
+        rgba(0,0,0,0.45);
+
+    cursor: pointer;
 
     user-select: none;
 
     transition:
-        transform 0.15s,
-        border-color 0.15s,
-        background 0.15s;
 
-    cursor: pointer;
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
 
 }
 
-/* Hover */
 
 .item:hover {
 
-    transform: scale(1.15);
+    transform: scale(1.18);
 
-    border-color: white;
+    border-color:
 
-    background: #333;
+        rgba(255,255,255,0.85);
 
-    z-index: 10;
+    box-shadow:
+
+        0 0 20px
+        rgba(255,255,255,0.15);
+
+    z-index: 20;
 
 }
 
-/* Tooltip */
+
+/* =========================================================
+   ÍCONE
+========================================================= */
+
+.item img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    pointer-events: none;
+
+}
+
+
+.item-name {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    top: 82px;
+
+    white-space: nowrap;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    color:
+
+        rgba(255,255,255,0.65);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   CONEXÕES
+========================================================= */
+
+.connection {
+
+    position: absolute;
+
+    height: 2px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.10),
+            rgba(255,255,255,0.35),
+            rgba(255,255,255,0.10)
+        );
+
+    transform-origin: left center;
+
+}
+
+
+/* =========================================================
+   TOOLTIP
+========================================================= */
 
 .tooltip {
 
     position: fixed;
 
-    width: 260px;
+    width: 280px;
 
-    padding: 15px;
+    padding: 17px;
 
-    background: rgba(20,20,20,0.96);
+    background:
 
-    border: 1px solid rgba(255,255,255,0.25);
+        linear-gradient(
+            145deg,
+            rgba(30,30,31,0.98),
+            rgba(15,15,16,0.98)
+        );
 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border:
+
+        1px solid
+        rgba(255,255,255,0.20);
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(0,0,0,0.65);
 
     color: white;
 
@@ -181,51 +367,155 @@ html, body {
 
     opacity: 0;
 
-    transition: opacity 0.1s;
+    transform:
+        translateY(5px);
+
+    transition:
+
+        opacity 0.12s ease,
+        transform 0.12s ease;
 
     z-index: 100;
 
 }
 
+
 .tooltip.visible {
+
     opacity: 1;
+
+    transform:
+        translateY(0);
+
 }
+
 
 .tooltip h2 {
 
-    margin: 0 0 5px 0;
+    margin:
+
+        0 0 4px 0;
 
     font-size: 17px;
 
 }
 
+
 .tooltip .type {
 
-    font-size: 11px;
+    font-size: 10px;
 
     text-transform: uppercase;
 
     letter-spacing: 2px;
 
-    opacity: 0.5;
+    color:
+
+        rgba(255,255,255,0.40);
 
 }
 
+
 .tooltip .cost {
 
-    margin-top: 8px;
+    margin-top: 10px;
+
+    font-size: 12px;
 
     font-weight: bold;
 
 }
 
+
 .tooltip p {
 
-    margin-bottom: 0;
+    margin:
 
-    line-height: 1.4;
+        10px 0 0 0;
 
     font-size: 13px;
+
+    line-height: 1.45;
+
+    color:
+
+        rgba(255,255,255,0.72);
+
+}
+
+
+/* =========================================================
+   CONTROLES
+========================================================= */
+
+.controls {
+
+    position: fixed;
+
+    right: 20px;
+    bottom: 20px;
+
+    display: flex;
+
+    gap: 5px;
+
+    z-index: 200;
+
+}
+
+
+.controls button {
+
+    width: 32px;
+    height: 32px;
+
+    border:
+
+        1px solid
+        rgba(255,255,255,0.15);
+
+    background:
+
+        rgba(20,20,20,0.85);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.controls button:hover {
+
+    background:
+
+        rgba(255,255,255,0.12);
+
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.shop-title {
+
+    position: absolute;
+
+    top: 55px;
+    left: 100px;
+
+    font-size: 18px;
+
+    letter-spacing: 5px;
+
+    color:
+
+        rgba(255,255,255,0.65);
+
+    font-weight: bold;
 
 }
 
@@ -233,328 +523,656 @@ html, body {
 
 </head>
 
+
 <body>
+
 
 <div id="viewport">
 
-    <div id="shop">
 
-        <!-- TIER 3 -->
-
-        <div class="tier tier3">
-
-            <div class="tier-name">
-                TIER 3
-            </div>
-
-        </div>
+<div id="shop">
 
 
-        <!-- TIER 2 -->
+<div class="shop-title">
 
-        <div class="tier tier2">
-
-            <div class="tier-name">
-                TIER 2
-            </div>
-
-        </div>
-
-
-        <!-- TIER 1 -->
-
-        <div class="tier tier1">
-
-            <div class="tier-name">
-                TIER 1
-            </div>
-
-        </div>
-
-
-        <!-- CONEXÕES -->
-
-        <div
-            class="connection"
-            style="
-                left: 370px;
-                top: 805px;
-                width: 300px;
-                transform: rotate(-45deg);
-            ">
-        </div>
-
-        <div
-            class="connection"
-            style="
-                left: 670px;
-                top: 595px;
-                width: 300px;
-                transform: rotate(45deg);
-            ">
-        </div>
-
-
-        <!-- ITENS TIER 1 -->
-
-        <div
-            class="item"
-            style="left: 300px; top: 805px;"
-            data-name="Pistola Velha"
-            data-type="Arma"
-            data-cost="$100"
-            data-description="Uma pistola velha, mas confiável. Serve como ponto de partida para modificações futuras."
-        >
-            PISTOLA
-        </div>
-
-
-        <div
-            class="item"
-            style="left: 600px; top: 805px;"
-            data-name="Munição Especial"
-            data-type="Melhoria"
-            data-cost="$150"
-            data-description="Munição modificada para causar efeitos adicionais contra determinados alvos."
-        >
-            MUNIÇÃO
-        </div>
-
-
-        <div
-            class="item"
-            style="left: 900px; top: 805px;"
-            data-name="Mira Improvisada"
-            data-type="Melhoria"
-            data-cost="$200"
-            data-description="Uma mira improvisada que melhora a precisão dos disparos."
-        >
-            MIRA
-        </div>
-
-
-        <!-- ITENS TIER 2 -->
-
-        <div
-            class="item"
-            style="left: 500px; top: 505px;"
-            data-name="Pistola Modificada"
-            data-type="Arma"
-            data-cost="$350"
-            data-description="Uma pistola modificada para disparos mais precisos e rápidos."
-        >
-            PISTOLA +
-        </div>
-
-
-        <div
-            class="item"
-            style="left: 800px; top: 505px;"
-            data-name="Munição Perfurante"
-            data-type="Melhoria"
-            data-cost="$400"
-            data-description="Projéteis capazes de atravessar parte da proteção de um alvo."
-        >
-            PERFURANTE
-        </div>
-
-
-        <!-- ITEM TIER 3 -->
-
-        <div
-            class="item"
-            style="left: 650px; top: 205px;"
-            data-name="Pistola Experimental"
-            data-type="Arma"
-            data-cost="$750"
-            data-description="Uma arma experimental capaz de receber modificações extremamente avançadas."
-        >
-            EXPERIMENTAL
-        </div>
-
-    </div>
+MIRA MORTA
 
 </div>
 
 
-<!-- TOOLTIP -->
+<!-- =====================================================
+     TIERS
+===================================================== -->
+
+
+<div class="tier tier1">
+
+<div class="tier-name">
+TIER 1
+</div>
+
+</div>
+
+
+<div class="tier tier2">
+
+<div class="tier-name">
+TIER 2
+</div>
+
+</div>
+
+
+<div class="tier tier3">
+
+<div class="tier-name">
+TIER 3
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     CONEXÕES
+===================================================== -->
+
+
+<div
+class="connection"
+
+style="
+left: 338px;
+top: 815px;
+width: 310px;
+transform: rotate(-44deg);
+">
+
+</div>
+
+
+<div
+class="connection"
+
+style="
+left: 648px;
+top: 590px;
+width: 300px;
+transform: rotate(44deg);
+">
+
+</div>
+
+
+<!-- =====================================================
+     TIER 1
+===================================================== -->
+
+
+<div
+
+class="item"
+
+style="
+left: 300px;
+top: 812px;
+"
+
+data-name="Pistola Velha"
+
+data-type="Arma"
+
+data-cost="$100"
+
+data-description="
+Uma pistola velha, mas confiável.
+Serve como ponto de partida para
+modificações futuras.
+"
+
+>
+
+<div class="item-name">
+
+PISTOLA
+
+</div>
+
+</div>
+
+
+
+<div
+
+class="item"
+
+style="
+left: 600px;
+top: 812px;
+"
+
+data-name="Munição Especial"
+
+data-type="Melhoria"
+
+data-cost="$150"
+
+data-description="
+Munição modificada para causar
+efeitos adicionais contra determinados
+alvos.
+"
+
+>
+
+<div class="item-name">
+
+MUNIÇÃO
+
+</div>
+
+</div>
+
+
+
+<div
+
+class="item"
+
+style="
+left: 900px;
+top: 812px;
+"
+
+data-name="Mira Improvisada"
+
+data-type="Melhoria"
+
+data-cost="$200"
+
+data-description="
+Uma mira improvisada que melhora
+a precisão dos disparos.
+"
+
+>
+
+<div class="item-name">
+
+MIRA
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TIER 2
+===================================================== -->
+
+
+<div
+
+class="item"
+
+style="
+left: 500px;
+top: 512px;
+"
+
+data-name="Pistola Modificada"
+
+data-type="Arma"
+
+data-cost="$350"
+
+data-description="
+Uma pistola modificada para disparos
+mais precisos e rápidos.
+"
+
+>
+
+<div class="item-name">
+
+PISTOLA +
+
+</div>
+
+</div>
+
+
+
+<div
+
+class="item"
+
+style="
+left: 800px;
+top: 512px;
+"
+
+data-name="Munição Perfurante"
+
+data-type="Melhoria"
+
+data-cost="$400"
+
+data-description="
+Projéteis capazes de atravessar parte
+da proteção de um alvo.
+"
+
+>
+
+<div class="item-name">
+
+PERFURANTE
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TIER 3
+===================================================== -->
+
+
+<div
+
+class="item"
+
+style="
+left: 650px;
+top: 212px;
+"
+
+data-name="Pistola Experimental"
+
+data-type="Arma"
+
+data-cost="$750"
+
+data-description="
+Uma arma experimental capaz de receber
+modificações extremamente avançadas.
+"
+
+>
+
+<div class="item-name">
+
+EXPERIMENTAL
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     TOOLTIP
+===================================================== -->
+
 
 <div id="tooltip" class="tooltip">
 
-    <h2 id="tooltip-name">
-        Item
-    </h2>
+<h2 id="tooltip-name">
+Item
+</h2>
 
-    <div id="tooltip-type" class="type">
-        Tipo
-    </div>
+<div
+id="tooltip-type"
+class="type">
 
-    <div id="tooltip-cost" class="cost">
-        Custo
-    </div>
-
-    <p id="tooltip-description">
-        Descrição
-    </p>
+Tipo
 
 </div>
+
+<div
+id="tooltip-cost"
+class="cost">
+
+Custo
+
+</div>
+
+<p
+id="tooltip-description">
+
+Descrição
+
+</p>
+
+</div>
+
+
+<!-- =====================================================
+     CONTROLES
+===================================================== -->
+
+
+<div class="controls">
+
+<button id="zoomOut">
+−
+</button>
+
+<button id="zoomIn">
++
+</button>
+
+</div>
+
 
 
 <script>
 
-/* =========================
+/* =========================================================
    MAPA
-========================= */
+========================================================= */
 
-const viewport = document.getElementById("viewport");
-const shop = document.getElementById("shop");
+
+const viewport =
+document.getElementById("viewport");
+
+const shop =
+document.getElementById("shop");
+
 
 let offsetX = 0;
+
 let offsetY = 0;
 
 let zoom = 1;
 
+
 let dragging = false;
 
 let startX = 0;
+
 let startY = 0;
 
-
-/* =========================
-   MOVIMENTO
-========================= */
-
-viewport.addEventListener("mousedown", function(e) {
-
-    dragging = true;
-
-    viewport.classList.add("dragging");
-
-    startX = e.clientX - offsetX;
-    startY = e.clientY - offsetY;
-
-});
-
-
-window.addEventListener("mouseup", function() {
-
-    dragging = false;
-
-    viewport.classList.remove("dragging");
-
-});
-
-
-window.addEventListener("mousemove", function(e) {
-
-    if (!dragging) return;
-
-    offsetX = e.clientX - startX;
-    offsetY = e.clientY - startY;
-
-    updateTransform();
-
-});
-
-
-/* =========================
-   ZOOM
-========================= */
-
-viewport.addEventListener("wheel", function(e) {
-
-    e.preventDefault();
-
-    if (e.deltaY < 0) {
-
-        zoom += 0.1;
-
-    } else {
-
-        zoom -= 0.1;
-
-    }
-
-    zoom = Math.max(0.5, Math.min(2, zoom));
-
-    updateTransform();
-
-});
 
 
 function updateTransform() {
 
-    shop.style.transform =
-        `translate(${offsetX}px, ${offsetY}px) scale(${zoom})`;
+shop.style.transform =
+
+`translate(${offsetX}px, ${offsetY}px)
+ scale(${zoom})`;
 
 }
 
 
-/* =========================
+/* =========================================================
+   ARRASTAR
+========================================================= */
+
+
+viewport.addEventListener(
+"mousedown",
+function(e) {
+
+if (
+e.target.closest(".item") ||
+e.target.closest(".controls")
+) {
+
+return;
+
+}
+
+dragging = true;
+
+viewport.classList.add(
+"dragging"
+);
+
+startX =
+e.clientX - offsetX;
+
+startY =
+e.clientY - offsetY;
+
+});
+
+
+window.addEventListener(
+"mouseup",
+function() {
+
+dragging = false;
+
+viewport.classList.remove(
+"dragging"
+);
+
+});
+
+
+window.addEventListener(
+"mousemove",
+function(e) {
+
+if (!dragging) return;
+
+offsetX =
+e.clientX - startX;
+
+offsetY =
+e.clientY - startY;
+
+updateTransform();
+
+});
+
+
+/* =========================================================
+   ZOOM
+========================================================= */
+
+
+viewport.addEventListener(
+"wheel",
+function(e) {
+
+e.preventDefault();
+
+if (e.deltaY < 0) {
+
+zoom += 0.1;
+
+}
+
+else {
+
+zoom -= 0.1;
+
+}
+
+zoom =
+Math.max(
+0.5,
+Math.min(2, zoom)
+);
+
+updateTransform();
+
+},
+{
+passive:false
+}
+);
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+
+document
+.getElementById("zoomIn")
+.addEventListener(
+"click",
+function() {
+
+zoom += 0.1;
+
+zoom =
+Math.min(2, zoom);
+
+updateTransform();
+
+});
+
+
+document
+.getElementById("zoomOut")
+.addEventListener(
+"click",
+function() {
+
+zoom -= 0.1;
+
+zoom =
+Math.max(0.5, zoom);
+
+updateTransform();
+
+});
+
+
+/* =========================================================
    TOOLTIP
-========================= */
+========================================================= */
+
 
 const tooltip =
-    document.getElementById("tooltip");
+document.getElementById(
+"tooltip"
+);
 
 const tooltipName =
-    document.getElementById("tooltip-name");
+document.getElementById(
+"tooltip-name"
+);
 
 const tooltipType =
-    document.getElementById("tooltip-type");
+document.getElementById(
+"tooltip-type"
+);
 
 const tooltipCost =
-    document.getElementById("tooltip-cost");
+document.getElementById(
+"tooltip-cost"
+);
 
 const tooltipDescription =
-    document.getElementById("tooltip-description");
+document.getElementById(
+"tooltip-description"
+);
 
 
 const items =
-    document.querySelectorAll(".item");
+document.querySelectorAll(
+".item"
+);
 
 
-items.forEach(function(item) {
-
-    item.addEventListener("mouseenter", function() {
-
-        tooltipName.textContent =
-            item.dataset.name;
-
-        tooltipType.textContent =
-            item.dataset.type;
-
-        tooltipCost.textContent =
-            "Custo: " + item.dataset.cost;
-
-        tooltipDescription.textContent =
-            item.dataset.description;
-
-        tooltip.classList.add("visible");
-
-    });
+items.forEach(
+function(item) {
 
 
-    item.addEventListener("mouseleave", function() {
+item.addEventListener(
+"mouseenter",
+function() {
 
-        tooltip.classList.remove("visible");
+tooltipName.textContent =
+item.dataset.name;
 
-    });
+tooltipType.textContent =
+item.dataset.type;
+
+tooltipCost.textContent =
+"Custo: " +
+item.dataset.cost;
+
+tooltipDescription.textContent =
+item.dataset.description;
+
+tooltip.classList.add(
+"visible"
+);
+
+});
 
 
-    item.addEventListener("mousemove", function(e) {
+item.addEventListener(
+"mouseleave",
+function() {
 
-        tooltip.style.left =
-            (e.clientX + 20) + "px";
+tooltip.classList.remove(
+"visible"
+);
 
-        tooltip.style.top =
-            (e.clientY + 20) + "px";
+});
 
-    });
+
+item.addEventListener(
+"mousemove",
+function(e) {
+
+let x =
+e.clientX + 20;
+
+let y =
+e.clientY + 20;
+
+
+/* evita que o tooltip
+saia da tela */
+
+if (
+x + 280 >
+window.innerWidth
+) {
+
+x =
+e.clientX - 300;
+
+}
+
+
+if (
+y + 180 >
+window.innerHeight
+) {
+
+y =
+e.clientY - 190;
+
+}
+
+
+tooltip.style.left =
+x + "px";
+
+tooltip.style.top =
+y + "px";
+
+});
 
 });
 
 </script>
 
 </body>
+
 </html>
