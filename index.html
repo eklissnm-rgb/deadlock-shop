@@ -5,47 +5,35 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mira Morta — Loja</title>
-
+<title>Mira Morta — Árvore de Evolução</title>
 
 <style>
-
-/* =========================================================
-   BASE
-========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
-html,
 body {
 
     margin: 0;
 
-    width: 100%;
-    height: 100%;
-
     overflow: hidden;
 
-    background: #101112;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    background:
+        radial-gradient(circle at center, #17191e 0%, #0b0c0f 75%);
 
     color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
 
 }
 
 
-/* =========================================================
+/* =========================
    ÁREA DO MAPA
-========================================================= */
+========================= */
 
 #viewport {
 
@@ -54,33 +42,9 @@ body {
 
     overflow: hidden;
 
-    position: relative;
-
     cursor: grab;
 
-    background:
-
-        radial-gradient(
-            circle at center,
-            rgba(120,120,120,0.08),
-            transparent 60%
-        ),
-
-        linear-gradient(
-            rgba(255,255,255,0.015) 1px,
-            transparent 1px
-        ),
-
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.015) 1px,
-            transparent 1px
-        );
-
-    background-size:
-        auto,
-        50px 50px,
-        50px 50px;
+    position: relative;
 
 }
 
@@ -92,192 +56,364 @@ body {
 }
 
 
-/* =========================================================
-   MAPA
-========================================================= */
-
 #shop {
 
     position: absolute;
 
-    width: 1800px;
-    height: 1200px;
+    width: 1900px;
+    height: 1500px;
 
     transform-origin: 0 0;
 
 }
 
 
-/* =========================================================
-   TIERS
-========================================================= */
+/* =========================
+   FUNDO / GRADE
+========================= */
 
-.tier {
-
-    position: absolute;
-
-    left: 100px;
-
-    width: 1600px;
-
-    border-top:
-
-        1px solid
-        rgba(255,255,255,0.10);
-
-}
-
-
-.tier::after {
+#shop::before {
 
     content: "";
 
     position: absolute;
 
-    left: 0;
-    right: 0;
+    inset: 0;
 
-    top: -1px;
+    background-image:
 
-    height: 1px;
-
-    background:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
 
         linear-gradient(
             90deg,
-            transparent,
-            rgba(255,255,255,0.18),
-            transparent
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
         );
+
+    background-size: 50px 50px;
+
+    pointer-events: none;
 
 }
 
 
-.tier-name {
+/* =========================
+   CATEGORIAS
+========================= */
+
+.category {
+
+    position: absolute;
+
+    top: 60px;
+
+    width: 500px;
+
+    height: 1360px;
+
+}
+
+
+.category-title {
+
+    position: absolute;
+
+    top: -45px;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+}
+
+
+.category-balistico {
+
+    left: 70px;
+
+}
+
+
+.category-espiritual {
+
+    left: 700px;
+
+}
+
+
+.category-vitalidade {
+
+    left: 1330px;
+
+}
+
+
+.category-balistico .category-title {
+
+    color: #d95353;
+
+}
+
+
+.category-espiritual .category-title {
+
+    color: #a76de8;
+
+}
+
+
+.category-vitalidade .category-title {
+
+    color: #63c878;
+
+}
+
+
+/* =========================
+   TIERS
+========================= */
+
+.tier {
 
     position: absolute;
 
     left: 0;
 
-    top: -35px;
+    width: 100%;
+
+    height: 1px;
+
+    background: rgba(255,255,255,0.12);
+
+}
+
+
+.tier::before {
+
+    content: attr(data-tier);
+
+    position: absolute;
+
+    left: 8px;
+
+    top: -18px;
 
     font-size: 11px;
 
-    letter-spacing: 4px;
+    color: rgba(255,255,255,0.3);
 
-    font-weight: bold;
-
-    color:
-
-        rgba(255,255,255,0.35);
+    letter-spacing: 2px;
 
 }
 
 
-/* posições */
+.tier-1 {
+    top: 1100px;
+}
 
-.tier1 {
 
-    top: 850px;
+.tier-2 {
+    top: 800px;
+}
+
+
+.tier-3 {
+    top: 500px;
+}
+
+
+.tier-4 {
+    top: 200px;
+}
+
+
+/* =========================
+   ÁREA DE CONEXÕES
+========================= */
+
+.connections {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+    overflow: visible;
 
 }
 
 
-.tier2 {
+.connection {
 
-    top: 550px;
+    fill: none;
 
-}
+    stroke-width: 3;
 
-
-.tier3 {
-
-    top: 250px;
+    opacity: 0.65;
 
 }
 
 
-/* =========================================================
+.connection-balistico {
+
+    stroke: #d95353;
+
+}
+
+
+.connection-vitalidade {
+
+    stroke: #63c878;
+
+}
+
+
+.connection-espiritual {
+
+    stroke: #a76de8;
+
+}
+
+
+/* =========================
    ITENS
-========================================================= */
+========================= */
 
 .item {
 
     position: absolute;
 
-    width: 76px;
-    height: 76px;
+    width: 86px;
+    height: 86px;
 
     border-radius: 50%;
 
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-
-    background:
-
-        radial-gradient(
-            circle,
-            #343638,
-            #171819
-        );
-
-    border:
-
-        2px solid
-        rgba(255,255,255,0.30);
-
-    box-shadow:
-
-        0 4px 15px
-        rgba(0,0,0,0.45);
+    transform: translate(-50%, -50%);
 
     cursor: pointer;
 
-    user-select: none;
-
     transition:
-
         transform 0.15s ease,
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+        filter 0.15s ease;
+
+    z-index: 10;
 
 }
 
 
 .item:hover {
 
-    transform: scale(1.18);
+    transform: translate(-50%, -50%) scale(1.12);
 
-    border-color:
-
-        rgba(255,255,255,0.85);
-
-    box-shadow:
-
-        0 0 20px
-        rgba(255,255,255,0.15);
-
-    z-index: 20;
+    filter: brightness(1.25);
 
 }
 
 
-/* =========================================================
-   ÍCONE
-========================================================= */
+.item::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -5px;
+
+    border-radius: 50%;
+
+    z-index: -1;
+
+}
+
+
+.item-balistico {
+
+    background:
+        radial-gradient(
+            circle,
+            #292020 0%,
+            #120e0e 75%
+        );
+
+    border: 2px solid #d95353;
+
+}
+
+
+.item-balistico::before {
+
+    border: 1px solid rgba(217,83,83,0.3);
+
+}
+
+
+.item-espiritual {
+
+    background:
+        radial-gradient(
+            circle,
+            #24202b 0%,
+            #110e15 75%
+        );
+
+    border: 2px solid #a76de8;
+
+}
+
+
+.item-espiritual::before {
+
+    border: 1px solid rgba(167,109,232,0.3);
+
+}
+
+
+.item-vitalidade {
+
+    background:
+        radial-gradient(
+            circle,
+            #202a22 0%,
+            #0d120e 75%
+        );
+
+    border: 2px solid #63c878;
+
+}
+
+
+.item-vitalidade::before {
+
+    border: 1px solid rgba(99,200,120,0.3);
+
+}
+
 
 .item img {
 
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
+    border-radius: 50%;
 
-    pointer-events: none;
+    object-fit: cover;
 
 }
 
@@ -286,96 +422,55 @@ body {
 
     position: absolute;
 
+    top: 91px;
+
     left: 50%;
 
     transform: translateX(-50%);
 
-    top: 82px;
+    width: 140px;
 
-    white-space: nowrap;
+    text-align: center;
 
-    font-size: 10px;
+    font-size: 12px;
 
-    letter-spacing: 1px;
+    line-height: 15px;
 
-    color:
-
-        rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.8);
 
     pointer-events: none;
 
 }
 
 
-/* =========================================================
-   CONEXÕES
-========================================================= */
-
-.connection {
-
-    position: absolute;
-
-    height: 2px;
-
-    background:
-
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.10),
-            rgba(255,255,255,0.35),
-            rgba(255,255,255,0.10)
-        );
-
-    transform-origin: left center;
-
-}
-
-
-/* =========================================================
+/* =========================
    TOOLTIP
-========================================================= */
+========================= */
 
 .tooltip {
 
     position: fixed;
 
-    width: 280px;
+    width: 260px;
 
-    padding: 17px;
+    padding: 14px;
 
-    background:
+    background: rgba(13,14,18,0.97);
 
-        linear-gradient(
-            145deg,
-            rgba(30,30,31,0.98),
-            rgba(15,15,16,0.98)
-        );
+    border: 1px solid rgba(255,255,255,0.15);
 
-    border:
-
-        1px solid
-        rgba(255,255,255,0.20);
+    border-radius: 8px;
 
     box-shadow:
-
-        0 15px 40px
-        rgba(0,0,0,0.65);
-
-    color: white;
+        0 10px 35px rgba(0,0,0,0.5);
 
     pointer-events: none;
 
     opacity: 0;
 
-    transform:
-        translateY(5px);
+    transition: opacity 0.1s ease;
 
-    transition:
-
-        opacity 0.12s ease,
-        transform 0.12s ease;
-
-    z-index: 100;
+    z-index: 1000;
 
 }
 
@@ -384,69 +479,49 @@ body {
 
     opacity: 1;
 
-    transform:
-        translateY(0);
-
 }
 
 
-.tooltip h2 {
+.tooltip-name {
 
-    margin:
-
-        0 0 4px 0;
-
-    font-size: 17px;
-
-}
-
-
-.tooltip .type {
-
-    font-size: 10px;
-
-    text-transform: uppercase;
-
-    letter-spacing: 2px;
-
-    color:
-
-        rgba(255,255,255,0.40);
-
-}
-
-
-.tooltip .cost {
-
-    margin-top: 10px;
-
-    font-size: 12px;
+    font-size: 16px;
 
     font-weight: bold;
 
+    margin-bottom: 5px;
+
 }
 
 
-.tooltip p {
+.tooltip-type {
 
-    margin:
+    font-size: 11px;
 
-        10px 0 0 0;
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 10px;
+
+    opacity: 0.6;
+
+}
+
+
+.tooltip-description {
 
     font-size: 13px;
 
-    line-height: 1.45;
+    line-height: 18px;
 
-    color:
-
-        rgba(255,255,255,0.72);
+    color: rgba(255,255,255,0.8);
 
 }
 
 
-/* =========================================================
+/* =========================
    CONTROLES
-========================================================= */
+========================= */
 
 .controls {
 
@@ -457,65 +532,59 @@ body {
 
     display: flex;
 
-    gap: 5px;
+    flex-direction: column;
 
-    z-index: 200;
+    gap: 6px;
+
+    z-index: 2000;
 
 }
 
 
 .controls button {
 
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
 
-    border:
+    border: 1px solid rgba(255,255,255,0.15);
 
-        1px solid
-        rgba(255,255,255,0.15);
+    border-radius: 6px;
 
-    background:
-
-        rgba(20,20,20,0.85);
+    background: #15171b;
 
     color: white;
 
-    cursor: pointer;
+    font-size: 20px;
 
-    font-size: 15px;
+    cursor: pointer;
 
 }
 
 
 .controls button:hover {
 
-    background:
-
-        rgba(255,255,255,0.12);
+    background: #24272d;
 
 }
 
 
-/* =========================================================
-   TÍTULO
-========================================================= */
+/* =========================
+   TIER LABEL CENTRAL
+========================= */
 
-.shop-title {
+.tier-label {
 
     position: absolute;
 
-    top: 55px;
-    left: 100px;
+    left: -60px;
 
-    font-size: 18px;
+    width: 40px;
 
-    letter-spacing: 5px;
+    text-align: center;
 
-    color:
+    font-size: 11px;
 
-        rgba(255,255,255,0.65);
-
-    font-weight: bold;
+    color: rgba(255,255,255,0.35);
 
 }
 
@@ -529,371 +598,818 @@ body {
 
 <div id="viewport">
 
+    <div id="shop">
 
-<div id="shop">
+        <!-- As categorias e itens serão criados pelo JavaScript -->
 
-
-<div class="shop-title">
-
-MIRA MORTA
+    </div>
 
 </div>
 
 
-<!-- =====================================================
-     TIERS
-===================================================== -->
+<div class="tooltip" id="tooltip">
 
+    <div class="tooltip-name" id="tooltip-name"></div>
 
-<div class="tier tier1">
+    <div class="tooltip-type" id="tooltip-type"></div>
 
-<div class="tier-name">
-TIER 1
-</div>
+    <div class="tooltip-description" id="tooltip-description"></div>
 
 </div>
-
-
-<div class="tier tier2">
-
-<div class="tier-name">
-TIER 2
-</div>
-
-</div>
-
-
-<div class="tier tier3">
-
-<div class="tier-name">
-TIER 3
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CONEXÕES
-===================================================== -->
-
-
-<div
-class="connection"
-
-style="
-left: 338px;
-top: 815px;
-width: 310px;
-transform: rotate(-44deg);
-">
-
-</div>
-
-
-<div
-class="connection"
-
-style="
-left: 648px;
-top: 590px;
-width: 300px;
-transform: rotate(44deg);
-">
-
-</div>
-
-
-<!-- =====================================================
-     TIER 1
-===================================================== -->
-
-
-<div
-
-class="item"
-
-style="
-left: 300px;
-top: 812px;
-"
-
-data-name="Tiro Reforçador na Cabeça"
-
-data-type="Balístico"
-
-data-cost="$100"
-
-data-description="
-Quando com um ataque físico provido de 
-uma arma de projétil ou de fogo você causar um acerto crítico 
-causa adicional 2 pontos de dano.
-"
-
->
-
-<img src="Headshot_Booster.png">
-
-<div class="item-name">
-
-PISTOLA
-
-</div>
-
-</div>
-
-
-
-<div
-
-class="item"
-
-style="
-left: 600px;
-top: 812px;
-"
-
-data-name="Munição Especial"
-
-data-type="Melhoria"
-
-data-cost="$150"
-
-data-description="
-Munição modificada para causar
-efeitos adicionais contra determinados
-alvos.
-"
-
->
-
-<div class="item-name">
-
-MUNIÇÃO
-
-</div>
-
-</div>
-
-
-
-<div
-
-class="item"
-
-style="
-left: 900px;
-top: 812px;
-"
-
-data-name="Mira Improvisada"
-
-data-type="Melhoria"
-
-data-cost="$200"
-
-data-description="
-Uma mira improvisada que melhora
-a precisão dos disparos.
-"
-
->
-
-<div class="item-name">
-
-MIRA
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TIER 2
-===================================================== -->
-
-
-<div
-
-class="item"
-
-style="
-left: 500px;
-top: 512px;
-"
-
-data-name="Pistola Modificada"
-
-data-type="Arma"
-
-data-cost="$350"
-
-data-description="
-Uma pistola modificada para disparos
-mais precisos e rápidos.
-"
-
->
-
-<div class="item-name">
-
-PISTOLA +
-
-</div>
-
-</div>
-
-
-
-<div
-
-class="item"
-
-style="
-left: 800px;
-top: 512px;
-"
-
-data-name="Munição Perfurante"
-
-data-type="Melhoria"
-
-data-cost="$400"
-
-data-description="
-Projéteis capazes de atravessar parte
-da proteção de um alvo.
-"
-
->
-
-<div class="item-name">
-
-PERFURANTE
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TIER 3
-===================================================== -->
-
-
-<div
-
-class="item"
-
-style="
-left: 650px;
-top: 212px;
-"
-
-data-name="Pistola Experimental"
-
-data-type="Arma"
-
-data-cost="$750"
-
-data-description="
-Uma arma experimental capaz de receber
-modificações extremamente avançadas.
-"
-
->
-
-<div class="item-name">
-
-EXPERIMENTAL
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     TOOLTIP
-===================================================== -->
-
-
-<div id="tooltip" class="tooltip">
-
-<h2 id="tooltip-name">
-Item
-</h2>
-
-<div
-id="tooltip-type"
-class="type">
-
-Tipo
-
-</div>
-
-<div
-id="tooltip-cost"
-class="cost">
-
-Custo
-
-</div>
-
-<p
-id="tooltip-description">
-
-Descrição
-
-</p>
-
-</div>
-
-
-<!-- =====================================================
-     CONTROLES
-===================================================== -->
 
 
 <div class="controls">
 
-<button id="zoomOut">
-−
-</button>
+    <button id="zoom-in">+</button>
 
-<button id="zoomIn">
-+
-</button>
+    <button id="zoom-out">−</button>
 
 </div>
 
 
-
 <script>
 
+
 /* =========================================================
-   MAPA
+   DADOS DOS ITENS
 ========================================================= */
 
 
-const viewport =
-document.getElementById("viewport");
+const itens = [
 
-const shop =
-document.getElementById("shop");
+    /* =========================
+       BALÍSTICO
+    ========================= */
+
+    {
+        id: "headshot",
+        nome: "Tiro Reforçado na Cabeça",
+        tipo: "Balístico",
+        tier: 1,
+        imagem: "Headshot_Booster.png",
+        x: 120,
+        y: 1100,
+        descricao:
+            "Quando um ataque físico provido de uma arma de projétil ou de fogo causar um acerto crítico, causa 2 pontos de dano adicional."
+    },
+
+    {
+        id: "expanded_mag",
+        nome: "Cartucho Ampliado",
+        tipo: "Balístico",
+        tier: 1,
+        imagem: "Expanded_Magazine.png",
+        x: 250,
+        y: 1100,
+        descricao:
+            "+1 munição."
+    },
+
+    {
+        id: "point_blank",
+        nome: "Cara a Cara",
+        tipo: "Balístico",
+        tier: 1,
+        imagem: "Point_Blank.png",
+        x: 360,
+        y: 1100,
+        descricao:
+            "Seus ataques com armas de projétil ou de fogo causam dano adicional quando realizados em distância imediata."
+    },
+
+    {
+        id: "rapid_rounds",
+        nome: "Balas Rápidas",
+        tipo: "Balístico",
+        tier: 1,
+        imagem: "Rapid_Rounds.png",
+        x: 470,
+        y: 1100,
+        descricao:
+            "Pode realizar um teste difícil para realizar outro ataque."
+    },
 
 
-let offsetX = 0;
+    {
+        id: "active_reload",
+        nome: "Recarregamento Ativo",
+        tipo: "Balístico",
+        tier: 2,
+        imagem: "Active_Reload.png",
+        x: 150,
+        y: 800,
+        descricao:
+            "Permite realizar um teste difícil para recarregar completamente sua arma. Pode ser usado uma vez por combate."
+    },
 
-let offsetY = 0;
+    {
+        id: "titanic_mag",
+        nome: "Cartucho Titânico",
+        tipo: "Balístico",
+        tier: 2,
+        imagem: "Titanic_Magazine.png",
+        x: 300,
+        y: 800,
+        descricao:
+            "+2 balas."
+    },
 
-let zoom = 1;
+    {
+        id: "disorienting_shot",
+        nome: "Tiro Desconcertante",
+        tipo: "Balístico",
+        tier: 2,
+        imagem: "Disorienting_Shot.png",
+        x: 450,
+        y: 800,
+        descricao:
+            "Acertos críticos reduzem em 1 Grau os testes de Reflexo e Resistência do alvo até o próximo teste dele."
+    },
 
+
+    {
+        id: "hunting_aura",
+        nome: "Aura de Caça",
+        tipo: "Balístico",
+        tier: 3,
+        imagem: "Hunting_Aura.png",
+        x: 190,
+        y: 500,
+        descricao:
+            "Quando estiver sozinho contra um oponente, com o aliado ou inimigo mais próximo a distância Média ou maior, ou ao realizar um golpe furtivo, seu inimigo sofre -1 dado em testes de Reflexo e Resistência."
+    },
+
+    {
+        id: "blood_tribute",
+        nome: "Tributo de Sangue",
+        tipo: "Balístico",
+        tier: 3,
+        imagem: "Blood_Tribute.png",
+        x: 390,
+        y: 500,
+        descricao:
+            "Pode escolher receber 3 de dano verdadeiro no início do seu turno para receber +1 dado em testes de Primor e Corpo durante este turno."
+    },
+
+
+    {
+        id: "armor_piercing",
+        nome: "Perfurarmadura",
+        tipo: "Balístico",
+        tier: 4,
+        imagem: "Armor_Piercing.png",
+        x: 190,
+        y: 200,
+        descricao:
+            "Role 1d12 sempre que fizer um ataque com armas à distância. Com 6+, seu tiro ignora armaduras e proteções, mas não ignora testes de Resistência."
+    },
+
+    {
+        id: "frenzy",
+        nome: "Frenesi",
+        tipo: "Balístico",
+        tier: 4,
+        imagem: "Frenzy.png",
+        x: 390,
+        y: 200,
+        descricao:
+            "Ao chegar à metade da sua Vida, arredondada para baixo, aumenta todos os seus atributos em 1. Não recebe Vida adicional proveniente de Corpo."
+    },
+
+
+    /* =========================
+       VITALIDADE
+    ========================= */
+
+    {
+        id: "extra_health",
+        nome: "Vida Adicional",
+        tipo: "Vitalidade",
+        tier: 1,
+        imagem: "Extra_Health.png",
+        x: 120,
+        y: 1100,
+        descricao:
+            "+3 pontos de vida."
+    },
+
+    {
+        id: "sprint_boots",
+        nome: "Botas de Corrida",
+        tipo: "Vitalidade",
+        tier: 1,
+        imagem: "Sprint_Boots.png",
+        x: 250,
+        y: 1100,
+        descricao:
+            "Pode fazer um teste difícil para aumentar em uma distância seu movimento."
+    },
+
+    {
+        id: "healing_rite",
+        nome: "Rito de Cura",
+        tipo: "Vitalidade",
+        tier: 1,
+        imagem: "Healing_Rite.png",
+        x: 360,
+        y: 1100,
+        descricao:
+            "Cura 1 ponto de vida de todas as pessoas à sua volta até você receber dano."
+    },
+
+    {
+        id: "parry",
+        nome: "Refutação",
+        tipo: "Vitalidade",
+        tier: 1,
+        imagem: "Parry.png",
+        x: 470,
+        y: 1100,
+        descricao:
+            "Caso apare um golpe com Resistência, recupera 1 ponto de vida e causa 1 ponto de dano ao alvo. Perfurante."
+    },
+
+
+    {
+        id: "hunting_trophy",
+        nome: "Troféu de Caça",
+        tipo: "Vitalidade",
+        tier: 2,
+        imagem: "Hunting_Trophy.png",
+        x: 150,
+        y: 800,
+        descricao:
+            "Mortes em inimigos poderosos recuperam uma munição da sua arma e adicionam +1 de dano fixo ao próximo ataque."
+    },
+
+    {
+        id: "reactive_barrier",
+        nome: "Barreira Reativa",
+        tipo: "Vitalidade",
+        tier: 2,
+        imagem: "Reactive_Barrier.png",
+        x: 300,
+        y: 800,
+        descricao:
+            "Quando entrar em Quebradura, recebe 5 pontos de vida temporários até o próximo turno."
+    },
+
+    {
+        id: "anti_heal",
+        nome: "Maldição Anticura",
+        tipo: "Vitalidade",
+        tier: 2,
+        imagem: "Anti_Heal.png",
+        x: 450,
+        y: 800,
+        descricao:
+            "Seu dano causa um efeito de Anticura. O próximo ponto de cura recebido é ignorado. Caso alguém morra enquanto estiver com este efeito há mais de um turno, você recupera 2 pontos de vida."
+    },
+
+
+    {
+        id: "resilience",
+        nome: "Resiliência",
+        tipo: "Vitalidade",
+        tier: 3,
+        imagem: "Resilience.png",
+        x: 190,
+        y: 500,
+        descricao:
+            "Quando não sofrer dano por 2 turnos seguidos, recupera Vida até o máximo de sua Vida Total menos seu atributo Corpo."
+    },
+
+    {
+        id: "resistance",
+        nome: "Resistência",
+        tipo: "Vitalidade",
+        tier: 3,
+        imagem: "Resistance.png",
+        x: 390,
+        y: 500,
+        descricao:
+            "Ao chegar à metade da sua Vida, arredondada para baixo, recebe Bloqueio 3 e Resistência 2 por 3 turnos. Isso não conta como uma armadura."
+    },
+
+
+    {
+        id: "cheat_death",
+        nome: "Enganar a Morte",
+        tipo: "Vitalidade",
+        tier: 4,
+        imagem: "Cheat_Death.png",
+        x: 190,
+        y: 200,
+        descricao:
+            "Ao receber dano letal, você não morre. Em vez disso, fica com 5 pontos de vida atuais. Ativa uma vez."
+    },
+
+    {
+        id: "colossus",
+        nome: "Colosso",
+        tipo: "Vitalidade",
+        tier: 4,
+        imagem: "Colossus.png",
+        x: 390,
+        y: 200,
+        descricao:
+            "+5 pontos de vida máxima e +1 de Redução de Dano geral."
+    },
+
+
+    /* =========================
+       ESPIRITUAL
+    ========================= */
+
+    {
+        id: "extra_charge",
+        nome: "Carga Adicional",
+        tipo: "Espiritual",
+        tier: 1,
+        imagem: "Extra_Charge.png",
+        x: 120,
+        y: 1100,
+        descricao: ""
+    },
+
+    {
+        id: "mythic_explosion",
+        nome: "Explosão Mítica",
+        tipo: "Espiritual",
+        tier: 1,
+        imagem: "Mythic_Explosion.png",
+        x: 250,
+        y: 1100,
+        descricao: ""
+    },
+
+    {
+        id: "spiritual_strike",
+        nome: "Golpe Espiritual",
+        tipo: "Espiritual",
+        tier: 1,
+        imagem: "Spiritual_Strike.png",
+        x: 360,
+        y: 1100,
+        descricao: ""
+    },
+
+    {
+        id: "rusted_cylinder",
+        nome: "Cilindro Enferrujado",
+        tipo: "Espiritual",
+        tier: 1,
+        imagem: "Rusted_Cylinder.png",
+        x: 470,
+        y: 1100,
+        descricao: ""
+    },
+
+
+    {
+        id: "mystical_vulnerability",
+        nome: "Vulnerabilidade Mística",
+        tipo: "Espiritual",
+        tier: 2,
+        imagem: "Mystical_Vulnerability.png",
+        x: 150,
+        y: 800,
+        descricao: ""
+    },
+
+    {
+        id: "suppression",
+        nome: "Supressão",
+        tipo: "Espiritual",
+        tier: 2,
+        imagem: "Suppression.png",
+        x: 300,
+        y: 800,
+        descricao: ""
+    },
+
+    {
+        id: "spiritual_piercing",
+        nome: "Espiritualidade Perfurante",
+        tipo: "Espiritual",
+        tier: 2,
+        imagem: "Spiritual_Piercing.png",
+        x: 450,
+        y: 800,
+        descricao: ""
+    },
+
+
+    {
+        id: "anti_tank",
+        nome: "Antitanque",
+        tipo: "Espiritual",
+        tier: 3,
+        imagem: "Anti_Tank.png",
+        x: 190,
+        y: 500,
+        descricao: ""
+    },
+
+    {
+        id: "disarming_spell",
+        nome: "Feitiço Desarmante",
+        tipo: "Espiritual",
+        tier: 3,
+        imagem: "Disarming_Spell.png",
+        x: 390,
+        y: 500,
+        descricao: ""
+    },
+
+
+    {
+        id: "growing_exposure",
+        nome: "Exposição Crescente",
+        tipo: "Espiritual",
+        tier: 4,
+        imagem: "Growing_Exposure.png",
+        x: 190,
+        y: 200,
+        descricao: ""
+    },
+
+    {
+        id: "restorer",
+        nome: "Restaurador",
+        tipo: "Espiritual",
+        tier: 4,
+        imagem: "Restorer.png",
+        x: 390,
+        y: 200,
+        descricao: ""
+    }
+
+];
+
+
+/* =========================================================
+   CONFIGURAÇÃO DAS CONEXÕES
+=========================================================
+
+   IMPORTANTE:
+
+   As conexões NÃO são automáticas.
+
+   Isso permite controlar manualmente caminhos longos,
+   como Vida Adicional → Colosso.
+
+========================================================= */
+
+
+const conexoes = [
+
+    {
+        de: "headshot",
+        para: "disorienting_shot",
+        tipo: "Balístico",
+        corredor: "direita"
+    },
+
+    {
+        de: "expanded_mag",
+        para: "titanic_mag",
+        tipo: "Balístico",
+        corredor: "esquerda"
+    },
+
+    {
+        de: "extra_health",
+        para: "colossus",
+        tipo: "Vitalidade",
+        corredor: "esquerda"
+    }
+
+];
+
+
+/* =========================================================
+   CRIAÇÃO DAS CATEGORIAS
+========================================================= */
+
+
+const shop = document.getElementById("shop");
+
+
+const categorias = {
+
+    "Balístico": "category-balistico",
+
+    "Espiritual": "category-espiritual",
+
+    "Vitalidade": "category-vitalidade"
+
+};
+
+
+for (const [nome, classe] of Object.entries(categorias)) {
+
+    const category = document.createElement("div");
+
+    category.className = `category ${classe}`;
+
+    category.dataset.tipo = nome;
+
+
+    const title = document.createElement("div");
+
+    title.className = "category-title";
+
+    title.textContent = nome;
+
+
+    category.appendChild(title);
+
+
+    for (let tier = 1; tier <= 4; tier++) {
+
+        const linha = document.createElement("div");
+
+        linha.className = `tier tier-${tier}`;
+
+        linha.dataset.tier = `TIER ${tier}`;
+
+
+        category.appendChild(linha);
+
+    }
+
+
+    const svg = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+    );
+
+    svg.classList.add("connections");
+
+    svg.setAttribute("viewBox", "0 0 500 1360");
+
+    svg.dataset.tipo = nome;
+
+
+    category.appendChild(svg);
+
+
+    shop.appendChild(category);
+
+}
+
+
+/* =========================================================
+   CRIAÇÃO DOS ITENS
+========================================================= */
+
+
+const itemElements = {};
+
+
+itens.forEach(item => {
+
+    const category = document.querySelector(
+        `.category[data-tipo="${item.tipo}"]`
+    );
+
+
+    const element = document.createElement("div");
+
+    element.className =
+        `item item-${item.tipo.toLowerCase()}`;
+
+
+    element.style.left = `${item.x}px`;
+
+    element.style.top = `${item.y}px`;
+
+
+    element.dataset.id = item.id;
+
+
+    const img = document.createElement("img");
+
+    img.src = item.imagem;
+
+    img.alt = item.nome;
+
+
+    const name = document.createElement("div");
+
+    name.className = "item-name";
+
+    name.textContent = item.nome;
+
+
+    element.appendChild(img);
+
+    element.appendChild(name);
+
+
+    category.appendChild(element);
+
+
+    itemElements[item.id] = element;
+
+
+    /* =========================
+       TOOLTIP
+    ========================= */
+
+    element.addEventListener("mouseenter", () => {
+
+        const tooltip =
+            document.getElementById("tooltip");
+
+        document.getElementById("tooltip-name")
+            .textContent = item.nome;
+
+        document.getElementById("tooltip-type")
+            .textContent =
+                `${item.tipo} · Tier ${item.tier}`;
+
+        document.getElementById("tooltip-description")
+            .textContent =
+                item.descricao ||
+                "Descrição ainda não definida.";
+
+
+        tooltip.classList.add("visible");
+
+    });
+
+
+    element.addEventListener("mousemove", event => {
+
+        const tooltip =
+            document.getElementById("tooltip");
+
+
+        let x = event.clientX + 18;
+
+        let y = event.clientY + 18;
+
+
+        if (x + 260 > window.innerWidth) {
+
+            x = event.clientX - 278;
+
+        }
+
+
+        if (y + 160 > window.innerHeight) {
+
+            y = event.clientY - 160;
+
+        }
+
+
+        tooltip.style.left = `${x}px`;
+
+        tooltip.style.top = `${y}px`;
+
+    });
+
+
+    element.addEventListener("mouseleave", () => {
+
+        document
+            .getElementById("tooltip")
+            .classList.remove("visible");
+
+    });
+
+});
+
+
+/* =========================================================
+   CONEXÕES
+========================================================= */
+
+
+function criarConexao(conexao) {
+
+    const origem = itens.find(
+        item => item.id === conexao.de
+    );
+
+    const destino = itens.find(
+        item => item.id === conexao.para
+    );
+
+
+    if (!origem || !destino) return;
+
+
+    const category =
+        document.querySelector(
+            `.category[data-tipo="${conexao.tipo}"]`
+        );
+
+
+    const svg =
+        category.querySelector(".connections");
+
+
+    /*
+       Cada conexão recebe um corredor diferente.
+
+       Isso é especialmente importante para conexões
+       que atravessam vários Tiers.
+    */
+
+    let corridorX;
+
+
+    if (conexao.corredor === "esquerda") {
+
+        corridorX = 35;
+
+    } else {
+
+        corridorX = 465;
+
+    }
+
+
+    /*
+       O caminho é ortogonal:
+
+       ITEM
+         |
+         |
+       CORREDOR
+         |
+         |
+       ITEM
+
+       Dessa forma a linha nunca fica diagonal
+       atravessando os itens intermediários.
+    */
+
+
+    const x1 = origem.x;
+
+    const y1 = origem.y;
+
+    const x2 = destino.x;
+
+    const y2 = destino.y;
+
+
+    const path =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+
+
+    const d = `
+
+        M ${x1} ${y1}
+
+        L ${corridorX} ${y1}
+
+        L ${corridorX} ${y2}
+
+        L ${x2} ${y2}
+
+    `;
+
+
+    path.setAttribute("d", d);
+
+    path.classList.add(
+        "connection",
+        `connection-${conexao.tipo.toLowerCase()}`
+    );
+
+
+    svg.appendChild(path);
+
+}
+
+
+/*
+   As conexões são desenhadas depois dos itens.
+*/
+
+
+conexoes.forEach(criarConexao);
+
+
+/* =========================================================
+   ZOOM / MOVIMENTO
+========================================================= */
+
+
+let scale = 0.75;
+
+let posX = 0;
+
+let posY = 0;
 
 let dragging = false;
 
@@ -902,278 +1418,156 @@ let startX = 0;
 let startY = 0;
 
 
+function atualizarMapa() {
 
-function updateTransform() {
-
-shop.style.transform =
-
-`translate(${offsetX}px, ${offsetY}px)
- scale(${zoom})`;
+    shop.style.transform =
+        `translate(${posX}px, ${posY}px) scale(${scale})`;
 
 }
 
 
-/* =========================================================
+document
+    .getElementById("zoom-in")
+    .addEventListener("click", () => {
+
+        scale = Math.min(
+            2,
+            scale + 0.1
+        );
+
+        atualizarMapa();
+
+    });
+
+
+document
+    .getElementById("zoom-out")
+    .addEventListener("click", () => {
+
+        scale = Math.max(
+            0.5,
+            scale - 0.1
+        );
+
+        atualizarMapa();
+
+    });
+
+
+/* =========================
    ARRASTAR
-========================================================= */
+========================= */
+
+
+const viewport =
+    document.getElementById("viewport");
 
 
 viewport.addEventListener(
-"mousedown",
-function(e) {
+    "mousedown",
+    event => {
 
-if (
-e.target.closest(".item") ||
-e.target.closest(".controls")
-) {
+        if (event.target.closest(".item")) {
 
-return;
+            return;
 
-}
+        }
 
-dragging = true;
 
-viewport.classList.add(
-"dragging"
+        dragging = true;
+
+        viewport.classList.add("dragging");
+
+
+        startX =
+            event.clientX - posX;
+
+        startY =
+            event.clientY - posY;
+
+    }
 );
-
-startX =
-e.clientX - offsetX;
-
-startY =
-e.clientY - offsetY;
-
-});
 
 
 window.addEventListener(
-"mouseup",
-function() {
+    "mousemove",
+    event => {
 
-dragging = false;
+        if (!dragging) return;
 
-viewport.classList.remove(
-"dragging"
+
+        posX =
+            event.clientX - startX;
+
+        posY =
+            event.clientY - startY;
+
+
+        atualizarMapa();
+
+    }
 );
-
-});
 
 
 window.addEventListener(
-"mousemove",
-function(e) {
+    "mouseup",
+    () => {
 
-if (!dragging) return;
+        dragging = false;
 
-offsetX =
-e.clientX - startX;
+        viewport.classList.remove("dragging");
 
-offsetY =
-e.clientY - startY;
-
-updateTransform();
-
-});
+    }
+);
 
 
-/* =========================================================
-   ZOOM
-========================================================= */
+/* =========================
+   ZOOM COM RODA DO MOUSE
+========================= */
 
 
 viewport.addEventListener(
-"wheel",
-function(e) {
+    "wheel",
+    event => {
 
-e.preventDefault();
+        event.preventDefault();
 
-if (e.deltaY < 0) {
 
-zoom += 0.1;
+        if (event.deltaY < 0) {
 
-}
+            scale += 0.08;
 
-else {
+        } else {
 
-zoom -= 0.1;
+            scale -= 0.08;
 
-}
+        }
 
-zoom =
-Math.max(
-0.5,
-Math.min(2, zoom)
-);
 
-updateTransform();
+        scale =
+            Math.max(
+                0.5,
+                Math.min(2, scale)
+            );
 
-},
-{
-passive:false
-}
+
+        atualizarMapa();
+
+    },
+    { passive: false }
 );
 
 
 /* =========================================================
-   BOTÕES
+   INICIALIZAÇÃO
 ========================================================= */
 
 
-document
-.getElementById("zoomIn")
-.addEventListener(
-"click",
-function() {
+atualizarMapa();
 
-zoom += 0.1;
-
-zoom =
-Math.min(2, zoom);
-
-updateTransform();
-
-});
-
-
-document
-.getElementById("zoomOut")
-.addEventListener(
-"click",
-function() {
-
-zoom -= 0.1;
-
-zoom =
-Math.max(0.5, zoom);
-
-updateTransform();
-
-});
-
-
-/* =========================================================
-   TOOLTIP
-========================================================= */
-
-
-const tooltip =
-document.getElementById(
-"tooltip"
-);
-
-const tooltipName =
-document.getElementById(
-"tooltip-name"
-);
-
-const tooltipType =
-document.getElementById(
-"tooltip-type"
-);
-
-const tooltipCost =
-document.getElementById(
-"tooltip-cost"
-);
-
-const tooltipDescription =
-document.getElementById(
-"tooltip-description"
-);
-
-
-const items =
-document.querySelectorAll(
-".item"
-);
-
-
-items.forEach(
-function(item) {
-
-
-item.addEventListener(
-"mouseenter",
-function() {
-
-tooltipName.textContent =
-item.dataset.name;
-
-tooltipType.textContent =
-item.dataset.type;
-
-tooltipCost.textContent =
-"Custo: " +
-item.dataset.cost;
-
-tooltipDescription.textContent =
-item.dataset.description;
-
-tooltip.classList.add(
-"visible"
-);
-
-});
-
-
-item.addEventListener(
-"mouseleave",
-function() {
-
-tooltip.classList.remove(
-"visible"
-);
-
-});
-
-
-item.addEventListener(
-"mousemove",
-function(e) {
-
-let x =
-e.clientX + 20;
-
-let y =
-e.clientY + 20;
-
-
-/* evita que o tooltip
-saia da tela */
-
-if (
-x + 280 >
-window.innerWidth
-) {
-
-x =
-e.clientX - 300;
-
-}
-
-
-if (
-y + 180 >
-window.innerHeight
-) {
-
-y =
-e.clientY - 190;
-
-}
-
-
-tooltip.style.left =
-x + "px";
-
-tooltip.style.top =
-y + "px";
-
-});
-
-});
 
 </script>
+
 
 </body>
 
