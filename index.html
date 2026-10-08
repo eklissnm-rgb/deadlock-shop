@@ -1,11 +1,560 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
-    <title>Mira Morta — Loja</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mira Morta — Loja</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #111;
+    font-family: Arial, sans-serif;
+}
+
+/* Área visível */
+
+#viewport {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+}
+
+/* Quando estiver arrastando */
+
+#viewport.dragging {
+    cursor: grabbing;
+}
+
+/* Mapa */
+
+#shop {
+    position: absolute;
+
+    width: 1800px;
+    height: 1200px;
+
+    transform-origin: 0 0;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(80,80,80,0.12),
+        transparent 60%);
+
+}
+
+/* Tiers */
+
+.tier {
+    position: absolute;
+
+    left: 100px;
+    width: 1600px;
+
+    border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.tier-name {
+
+    position: absolute;
+
+    left: 0;
+    top: -30px;
+
+    font-size: 14px;
+    letter-spacing: 3px;
+
+    color: rgba(255,255,255,0.45);
+
+}
+
+/* Tier positions */
+
+.tier1 {
+    top: 850px;
+}
+
+.tier2 {
+    top: 550px;
+}
+
+.tier3 {
+    top: 250px;
+}
+
+/* Connections */
+
+.connection {
+
+    position: absolute;
+
+    height: 3px;
+
+    background: rgba(255,255,255,0.25);
+
+    transform-origin: left center;
+
+}
+
+/* Items */
+
+.item {
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #202020;
+
+    border: 3px solid #888;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    user-select: none;
+
+    transition:
+        transform 0.15s,
+        border-color 0.15s,
+        background 0.15s;
+
+    cursor: pointer;
+
+}
+
+/* Hover */
+
+.item:hover {
+
+    transform: scale(1.15);
+
+    border-color: white;
+
+    background: #333;
+
+    z-index: 10;
+
+}
+
+/* Tooltip */
+
+.tooltip {
+
+    position: fixed;
+
+    width: 260px;
+
+    padding: 15px;
+
+    background: rgba(20,20,20,0.96);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+    color: white;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transition: opacity 0.1s;
+
+    z-index: 100;
+
+}
+
+.tooltip.visible {
+    opacity: 1;
+}
+
+.tooltip h2 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 17px;
+
+}
+
+.tooltip .type {
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+
+    opacity: 0.5;
+
+}
+
+.tooltip .cost {
+
+    margin-top: 8px;
+
+    font-weight: bold;
+
+}
+
+.tooltip p {
+
+    margin-bottom: 0;
+
+    line-height: 1.4;
+
+    font-size: 13px;
+
+}
+
+</style>
+
 </head>
 
 <body>
-    <h1>Loja Mira Morta</h1>
-    <p>Funcionou!</p>
+
+<div id="viewport">
+
+    <div id="shop">
+
+        <!-- TIER 3 -->
+
+        <div class="tier tier3">
+
+            <div class="tier-name">
+                TIER 3
+            </div>
+
+        </div>
+
+
+        <!-- TIER 2 -->
+
+        <div class="tier tier2">
+
+            <div class="tier-name">
+                TIER 2
+            </div>
+
+        </div>
+
+
+        <!-- TIER 1 -->
+
+        <div class="tier tier1">
+
+            <div class="tier-name">
+                TIER 1
+            </div>
+
+        </div>
+
+
+        <!-- CONEXÕES -->
+
+        <div
+            class="connection"
+            style="
+                left: 370px;
+                top: 805px;
+                width: 300px;
+                transform: rotate(-45deg);
+            ">
+        </div>
+
+        <div
+            class="connection"
+            style="
+                left: 670px;
+                top: 595px;
+                width: 300px;
+                transform: rotate(45deg);
+            ">
+        </div>
+
+
+        <!-- ITENS TIER 1 -->
+
+        <div
+            class="item"
+            style="left: 300px; top: 805px;"
+            data-name="Pistola Velha"
+            data-type="Arma"
+            data-cost="$100"
+            data-description="Uma pistola velha, mas confiável. Serve como ponto de partida para modificações futuras."
+        >
+            PISTOLA
+        </div>
+
+
+        <div
+            class="item"
+            style="left: 600px; top: 805px;"
+            data-name="Munição Especial"
+            data-type="Melhoria"
+            data-cost="$150"
+            data-description="Munição modificada para causar efeitos adicionais contra determinados alvos."
+        >
+            MUNIÇÃO
+        </div>
+
+
+        <div
+            class="item"
+            style="left: 900px; top: 805px;"
+            data-name="Mira Improvisada"
+            data-type="Melhoria"
+            data-cost="$200"
+            data-description="Uma mira improvisada que melhora a precisão dos disparos."
+        >
+            MIRA
+        </div>
+
+
+        <!-- ITENS TIER 2 -->
+
+        <div
+            class="item"
+            style="left: 500px; top: 505px;"
+            data-name="Pistola Modificada"
+            data-type="Arma"
+            data-cost="$350"
+            data-description="Uma pistola modificada para disparos mais precisos e rápidos."
+        >
+            PISTOLA +
+        </div>
+
+
+        <div
+            class="item"
+            style="left: 800px; top: 505px;"
+            data-name="Munição Perfurante"
+            data-type="Melhoria"
+            data-cost="$400"
+            data-description="Projéteis capazes de atravessar parte da proteção de um alvo."
+        >
+            PERFURANTE
+        </div>
+
+
+        <!-- ITEM TIER 3 -->
+
+        <div
+            class="item"
+            style="left: 650px; top: 205px;"
+            data-name="Pistola Experimental"
+            data-type="Arma"
+            data-cost="$750"
+            data-description="Uma arma experimental capaz de receber modificações extremamente avançadas."
+        >
+            EXPERIMENTAL
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOOLTIP -->
+
+<div id="tooltip" class="tooltip">
+
+    <h2 id="tooltip-name">
+        Item
+    </h2>
+
+    <div id="tooltip-type" class="type">
+        Tipo
+    </div>
+
+    <div id="tooltip-cost" class="cost">
+        Custo
+    </div>
+
+    <p id="tooltip-description">
+        Descrição
+    </p>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MAPA
+========================= */
+
+const viewport = document.getElementById("viewport");
+const shop = document.getElementById("shop");
+
+let offsetX = 0;
+let offsetY = 0;
+
+let zoom = 1;
+
+let dragging = false;
+
+let startX = 0;
+let startY = 0;
+
+
+/* =========================
+   MOVIMENTO
+========================= */
+
+viewport.addEventListener("mousedown", function(e) {
+
+    dragging = true;
+
+    viewport.classList.add("dragging");
+
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
+
+});
+
+
+window.addEventListener("mouseup", function() {
+
+    dragging = false;
+
+    viewport.classList.remove("dragging");
+
+});
+
+
+window.addEventListener("mousemove", function(e) {
+
+    if (!dragging) return;
+
+    offsetX = e.clientX - startX;
+    offsetY = e.clientY - startY;
+
+    updateTransform();
+
+});
+
+
+/* =========================
+   ZOOM
+========================= */
+
+viewport.addEventListener("wheel", function(e) {
+
+    e.preventDefault();
+
+    if (e.deltaY < 0) {
+
+        zoom += 0.1;
+
+    } else {
+
+        zoom -= 0.1;
+
+    }
+
+    zoom = Math.max(0.5, Math.min(2, zoom));
+
+    updateTransform();
+
+});
+
+
+function updateTransform() {
+
+    shop.style.transform =
+        `translate(${offsetX}px, ${offsetY}px) scale(${zoom})`;
+
+}
+
+
+/* =========================
+   TOOLTIP
+========================= */
+
+const tooltip =
+    document.getElementById("tooltip");
+
+const tooltipName =
+    document.getElementById("tooltip-name");
+
+const tooltipType =
+    document.getElementById("tooltip-type");
+
+const tooltipCost =
+    document.getElementById("tooltip-cost");
+
+const tooltipDescription =
+    document.getElementById("tooltip-description");
+
+
+const items =
+    document.querySelectorAll(".item");
+
+
+items.forEach(function(item) {
+
+    item.addEventListener("mouseenter", function() {
+
+        tooltipName.textContent =
+            item.dataset.name;
+
+        tooltipType.textContent =
+            item.dataset.type;
+
+        tooltipCost.textContent =
+            "Custo: " + item.dataset.cost;
+
+        tooltipDescription.textContent =
+            item.dataset.description;
+
+        tooltip.classList.add("visible");
+
+    });
+
+
+    item.addEventListener("mouseleave", function() {
+
+        tooltip.classList.remove("visible");
+
+    });
+
+
+    item.addEventListener("mousemove", function(e) {
+
+        tooltip.style.left =
+            (e.clientX + 20) + "px";
+
+        tooltip.style.top =
+            (e.clientY + 20) + "px";
+
+    });
+
+});
+
+</script>
+
 </body>
 </html>
